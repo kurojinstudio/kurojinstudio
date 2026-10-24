@@ -1,0 +1,431 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-bg: #010101;
+  --color-off-white: #fffaee;
+  --color-light-gray: #d0d0d0;
+  --color-near-white: #f4f4f4;
+  --color-accent: #00ff91;
+  --color-accent-alt: #00fee0;
+  --color-warm: #ffecb9;
+  --font-garamond: var(--font-eb-garamond);
+  --font-montserrat: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* NOTE: do NOT add an unlayered universal margin/padding reset here.
+   Tailwind v4 puts utilities in @layer utilities, and UNLAYERED css wins
+   the cascade over layered css regardless of specificity — an unlayered
+   universal reset silently kills every padding/margin utility site-wide
+   (that was the "cramped slop" root cause). Preflight already resets. */
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+/* NOTE: do NOT put overflow-x: clip/hidden on html or body.
+   Per CSS spec, overflow-x: clip + overflow-y: visible computes to auto,
+   which turns them into scroll containers and BREAKS position: sticky
+   (the FeaturedShowcase preview card). Horizontal bleed is instead killed
+   per-section via overflow-hidden on the marquee/showcase sections. */
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--color-bg);
+  color: #fff;
+  font-family: var(--font-helvetica);
+  /* NO overflow-x here — see note above; it breaks position: sticky */
+}
+
+/* Hide scrollbar globally */
+* {
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --radius: 0.625rem;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ── Shared motion keyframes ── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gentlePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.8; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee 35s linear infinite reverse;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(120vh) scale(0.4); opacity: 0; }
+  15% { opacity: 0.9; }
+  85% { opacity: 0.9; }
+  100% { transform: translateY(-80px) scale(1.1); opacity: 0; }
+}
+
+.floating-element {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+}
+
+.trail-img {
+  width: 145px;
+  height: 145px;
+  object-fit: cover;
+}
+
+/* ── CTA Button (shared) ── */
+.cta-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-montserrat);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 55px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 10;
+  will-change: transform;
+  transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  background: white;
+  color: #000;
+}
+.cta-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #ff8c2b, #ff3c00);
+  box-shadow: 0 0 30px rgba(255, 92, 26, 0.5), 0 0 60px rgba(255, 60, 0, 0.3);
+}
+.cta-button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ── Section spacing helper ── */
+.section-wrapper {
+  scroll-margin-top: 100px;
+}
+
+/* Hide native cursor on fine pointers — CustomCursor takes over */
+@media (pointer: fine) {
+  body.custom-cursor-on,
+  body.custom-cursor-on a,
+  body.custom-cursor-on button,
+  body.custom-cursor-on [data-cursor-hover] {
+    cursor: none;
+  }
+}
+
+/* ── Fire wordmark — the one flame in a black & white footer ── */
+/* force-recompile-2 */
+.kurojin-fire {
+  background: linear-gradient(
+    180deg,
+    #fff3d6 0%,
+    #ffd166 18%,
+    #ff9e2c 38%,
+    #ff5c1a 58%,
+    #e6390f 78%,
+    #7a1204 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 28px rgba(255, 92, 26, 0.28))
+    drop-shadow(0 0 80px rgba(255, 60, 0, 0.14));
+}
+
+/* ── SplitReveal line masks ── */
+.sr-mask {
+  display: block;
+  overflow: hidden;
+}
+.sr-line {
+  display: block;
+  will-change: transform;
+}
+
+/* ── Global layout system: consistent left/right margins on every page ── */
+.k-container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 96px);
+  max-width: 1600px;
+}
+.k-container-narrow {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 96px);
+  max-width: 1200px;
+}
+/* Prevent any text/card from bleeding off the viewport edge */
+.k-safe {
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+/* Clamp giant display type so it never clips at screen edges */
+.k-display {
+  font-size: clamp(34px, 7.5vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.k-display-sm {
+  font-size: clamp(28px, 5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+/* Make sure background shows through sections */
+.Clients, .Story, .Services, .Work, .Budget, .CTA {
+  background: transparent !important;
+}
+
+@theme inline {
+  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1
+  var(--delay, 0ms);
+
+  @keyframes cell-ripple {
+    0% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.4; }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SERVICE DOSSIER THEME — "classified dossier meets modern lab"
+   Black field, paper-redaction motifs, stamp red #ff4a1c used
+   sparingly. Type: EB Garamond display / Helvetica labels /
+   IBM Plex Mono for data & clues.
+   ══════════════════════════════════════════════════════════ */
+@theme inline {
+  --font-clue: var(--font-plex-mono);
+}
+
+/* ── Redacted-word primitive ── */
+.rd-wrap {
+  position: relative;
+  display: inline-block;
+}
+.rd-bar {
+  position: absolute;
+  top: 0.02em;
+  bottom: -0.05em;
+  left: -0.12em;
+  right: -0.16em;
+  background: linear-gradient(175deg, #ded7c6 0%, #c9c0aa 100%);
+  transform-origin: 100% 50%;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+.is-declassified .rd-bar,
+.rd-hover:hover .rd-bar {
+  transform: scaleX(0);
+}
+
+/* ── Rubber stamp ── */
+.stamp-double {
+  border: 2px solid currentColor;
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--rot, -7deg)) scale(2.3);
+    filter: blur(3px);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(var(--rot, -7deg)) scale(0.93);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0.92;
+    transform: rotate(var(--rot, -7deg)) scale(1);
+  }
+}
+.stamp-in {
+  animation: stamp-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Scroll reveals — IntersectionObserver toggles .is-revealed ── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
