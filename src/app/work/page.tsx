@@ -43,6 +43,28 @@ const categories: { id: WorkCategory | "all"; label: string }[] = [
 
 const projects: WorkProject[] = [
   {
+    id: "if1",
+    title: "Infosys",
+    subtitle: "Technology — Visual Design",
+    category: "branding",
+    services: ["Branding", "Visual Design", "Digital"],
+    description:
+      "Visual design work for Infosys across branded digital and communication experiences.",
+    image: "/images/work/INFOSYS.png",
+    accent: "#60A5FA",
+  },
+  {
+    id: "ar2",
+    title: "Aryan",
+    subtitle: "Brand — Visual Design",
+    category: "branding",
+    services: ["Branding", "Visual Design", "Campaign"],
+    description:
+      "A visual design project for Aryan shaped around a clear, expressive brand language.",
+    image: "/images/work/aryan.png",
+    accent: "#F59E0B",
+  },
+  {
     id: "sk1",
     title: "Skinora",
     subtitle: "Beauty — Packaging Design",
