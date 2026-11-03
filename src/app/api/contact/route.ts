@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const DEFAULT_SHEETS_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbzhN_rmuoIDuYkED9ESmGYNt-3T_S71g30lxhmSnIORGrAoStdu5-4y74-IuuIzjlU/exec";
+
 type ContactSubmission = {
   name: string;
   email: string;
@@ -57,7 +60,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const sheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+    const sheetsWebhookUrl =
+      process.env.GOOGLE_SHEETS_WEBHOOK_URL || DEFAULT_SHEETS_WEBHOOK_URL;
 
     if (sheetsWebhookUrl) {
       try {
