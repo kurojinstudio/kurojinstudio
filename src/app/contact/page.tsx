@@ -282,12 +282,12 @@ export default function ContactPage() {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) {
-        throw new Error(data.error || "Something went wrong.");
+        throw new Error("Could not send your message. Please try again.");
       }
       setFormState("success");
+      setFormData({ name: "", email: "", projectType: "", budget: "", message: "" });
       setTimeout(() => {
         setFormState("idle");
-        setFormData({ name: "", email: "", projectType: "", budget: "", message: "" });
       }, 4000);
     } catch (err) {
       setFormState("error");
@@ -415,21 +415,18 @@ export default function ContactPage() {
                     </span>
                   </div>
 
-                  {formState === "success" ? (
-                    <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
-                      <span className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#a78bfa]/50 text-[28px] text-[#a78bfa]">
-                        ✓
-                      </span>
-                      <h3 className="font-garamond text-[32px] italic text-white">
-                        Transmission received.
-                      </h3>
-                      <p className="mt-4 max-w-[320px] text-[14px] font-light leading-6 text-white/55">
-                        We&apos;ll decode it and reply within 24 hours. Keep an
-                        eye on your inbox.
-                      </p>
+                  {formState === "success" && (
+                    <div
+                      role="status"
+                      aria-live="polite"
+                      className="pointer-events-none absolute left-8 right-8 top-24 z-10 rounded-xl border border-[#a78bfa]/35 bg-[#0b0a10]/95 px-5 py-4 text-center text-[13px] text-white shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-md md:left-10 md:right-10"
+                    >
+                      <span className="mr-2 text-[#a78bfa]">✓</span>
+                      Sent successfully.
                     </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} noValidate>
+                  )}
+
+                  <form onSubmit={handleSubmit} noValidate>
                       <div className="grid gap-7 sm:grid-cols-2">
                         <div>
                           <label htmlFor="name" className={labelClass}>
@@ -470,11 +467,14 @@ export default function ContactPage() {
                             name="projectType"
                             value={formData.projectType}
                             onChange={handleChange}
-                            className={`${inputClass} cursor-pointer appearance-none bg-[#020204]`}
+                            className={`${inputClass} cursor-pointer appearance-none bg-[#020204] text-white [&>option]:bg-[#020204] [&>option]:text-white`}
+                            style={{ color: "#fff", backgroundColor: "#020204", colorScheme: "dark" }}
                           >
-                            <option value="">Select…</option>
+                            <option value="" style={{ color: "#fff", backgroundColor: "#020204" }}>
+                              Select…
+                            </option>
                             {projectTypes.map((t) => (
-                              <option key={t} value={t}>
+                              <option key={t} value={t} style={{ color: "#fff", backgroundColor: "#020204" }}>
                                 {t}
                               </option>
                             ))}
@@ -489,11 +489,14 @@ export default function ContactPage() {
                             name="budget"
                             value={formData.budget}
                             onChange={handleChange}
-                            className={`${inputClass} cursor-pointer appearance-none bg-[#020204]`}
+                            className={`${inputClass} cursor-pointer appearance-none bg-[#020204] text-white [&>option]:bg-[#020204] [&>option]:text-white`}
+                            style={{ color: "#fff", backgroundColor: "#020204", colorScheme: "dark" }}
                           >
-                            <option value="">Select…</option>
+                            <option value="" style={{ color: "#fff", backgroundColor: "#020204" }}>
+                              Select…
+                            </option>
                             {budgetRanges.map((b) => (
-                              <option key={b} value={b}>
+                              <option key={b} value={b} style={{ color: "#fff", backgroundColor: "#020204" }}>
                                 {b}
                               </option>
                             ))}
@@ -537,8 +540,7 @@ export default function ContactPage() {
                           <>Send message ↗</>
                         )}
                       </button>
-                    </form>
-                  )}
+                  </form>
                 </div>
               </div>
             </div>

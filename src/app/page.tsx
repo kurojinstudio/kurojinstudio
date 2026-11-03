@@ -32,8 +32,6 @@ export default function Home() {
           <Clients />
           <Story />
           {!isMobile && <Services />}
-          {!isMobile && <TextVideo />}
-          <CTA />
           <Engage />
           <Work />
           <Budget />

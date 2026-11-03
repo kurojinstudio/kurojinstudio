@@ -100,17 +100,6 @@ export default function Hero() {
       className="relative w-full min-h-[640px] h-[100svh] overflow-hidden cursor-none"
     >
       <HalftoneReveal className="z-10 hidden md:block" />
-      {/* ══ corner meta — mono micro-labels ══ */}
-      <div data-hero-fade className="absolute top-[88px] left-4 md:left-[4%] z-30 font-montserrat text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-white/50">
-        
-        Est. 2024 — 黒人
-      </div>
-      <div data-hero-fade className="absolute top-[88px] right-4 md:right-[4%] z-30 font-montserrat text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-white/50 text-right">
-        Full-spectrum
-        <br className="hidden md:block" /> creative studio
-      </div>
-
-      {/* ══ giant type block ══ */}
       <div
   ref={typeRef}
   className="absolute inset-0 z-20 flex items-center justify-center px-4 pb-20 md:pb-0"

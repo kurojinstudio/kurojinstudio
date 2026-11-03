@@ -12,8 +12,8 @@ export const siteConfig = {
 
   contact: {
     // TODO: paste your real contact details
-    email: "hello@kurojin.studio",
-    phone: "+91 00000 00000",
+    email: "kurojinstudio@gmail.com",
+    phone: "+91 84688 33408",
     location: "India",
     // Form submissions go here. Options:
     //  - Formspree:  https://formspree.io/f/YOUR_ID
