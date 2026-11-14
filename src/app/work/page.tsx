@@ -55,7 +55,7 @@ const projects: WorkProject[] = [
   },
   {
     id: "ar2",
-    title: "Aryan",
+    title: "Aryan Tech",
     subtitle: "Brand — Visual Design",
     category: "branding",
     services: ["Branding", "Visual Design", "Campaign"],
@@ -63,6 +63,39 @@ const projects: WorkProject[] = [
       "A visual design project for Aryan shaped around a clear, expressive brand language.",
     image: "/images/work/aryan.png",
     accent: "#F59E0B",
+  },
+  {
+    id: "rc4",
+    title: "Roca",
+    subtitle: "Cookware — E-Commerce",
+    category: "web",
+    services: ["Web Design", "Product Visuals", "Digital"],
+    description:
+      "An e-commerce experience for Roca cast-iron cookware — web design and a complete set of product visuals.",
+    image: "/images/work/roca.jpg",
+    accent: "#F97316",
+  },
+  {
+    id: "mb3",
+    title: "Mr. Barber",
+    subtitle: "Grooming — Brand Campaign",
+    category: "campaign",
+    services: ["Packaging", "Product Art Direction", "Social"],
+    description:
+      "A brand campaign around the Autograph Pro range — product art direction, packaging, and social launch assets.",
+    image: "/images/work/mr-barber.jpg",
+    accent: "#8B5CF6",
+  },
+  {
+    id: "be6",
+    title: "Blue Emerald",
+    subtitle: "Architecture — 3D Visualization",
+    category: "2d",
+    services: ["Arch Viz", "Exterior", "3D"],
+    description:
+      "Full architectural 3D visualization for the Blue Emerald building — exterior renders, lighting study, and street context.",
+    image: "/images/work/blue-emerald.jpg",
+    accent: "#10B981",
   },
   {
     id: "sk1",
@@ -87,28 +120,6 @@ const projects: WorkProject[] = [
     accent: "#3B82F6",
   },
   {
-    id: "mb3",
-    title: "Mr. Barber",
-    subtitle: "Grooming — Brand Campaign",
-    category: "campaign",
-    services: ["Packaging", "Product Art Direction", "Social"],
-    description:
-      "A brand campaign around the Autograph Pro range — product art direction, packaging, and social launch assets.",
-    image: "/images/work/mr-barber.jpg",
-    accent: "#8B5CF6",
-  },
-  {
-    id: "rc4",
-    title: "Roca",
-    subtitle: "Cookware — E-Commerce",
-    category: "web",
-    services: ["Web Design", "Product Visuals", "Digital"],
-    description:
-      "An e-commerce experience for Roca cast-iron cookware — web design and a complete set of product visuals.",
-    image: "/images/work/roca.jpg",
-    accent: "#F97316",
-  },
-  {
     id: "hs5",
     title: "Haus",
     subtitle: "Collectibles — Brand & Web",
@@ -118,17 +129,6 @@ const projects: WorkProject[] = [
       "Brand and web design for Haus collectible vinyl figures — 3D product-first e-commerce built around color and character.",
     image: "/images/work/haus.jpg",
     accent: "#D946EF",
-  },
-  {
-    id: "be6",
-    title: "Blue Emerald",
-    subtitle: "Architecture — 3D Visualization",
-    category: "2d",
-    services: ["Arch Viz", "Exterior", "3D"],
-    description:
-      "Full architectural 3D visualization for the Blue Emerald building — exterior renders, lighting study, and street context.",
-    image: "/images/work/blue-emerald.jpg",
-    accent: "#10B981",
   },
 ];
 
@@ -293,7 +293,7 @@ export default function WorkPage() {
 
             {/* giant index rows */}
             <div data-cursor="VIEW">
-              {projects.slice(0, 3).map((p, i) => (
+              {projects.slice(0, 5).map((p, i) => (
                 <div key={p.id} className="overflow-hidden border-b border-white/8">
                   <Link
                     href="#featured"
@@ -361,7 +361,7 @@ export default function WorkPage() {
               Featured — the pillars
             </p>
           </div>
-          <FeaturedShowcase projects={projects.slice(3)} />
+          <FeaturedShowcase projects={projects.slice(5)} />
         </div>
 
         {/* ══════════ 3. HORIZONTAL SHOWCASE — pinned scroll ══════════ */}
