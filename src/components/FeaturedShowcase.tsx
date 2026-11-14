@@ -75,6 +75,21 @@ export default function FeaturedShowcase({
         );
       });
 
+      gsap.utils.toArray<HTMLElement>("[data-fs-mobile-image]").forEach((image) => {
+        gsap.fromTo(
+          image,
+          { opacity: 0, y: 24, scale: 0.98 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.75,
+            ease: "power3.out",
+            scrollTrigger: { trigger: image, start: "top 90%", once: true },
+          }
+        );
+      });
+
       // progress rail across the whole showcase
       ScrollTrigger.create({
         trigger: rootRef.current,
@@ -171,6 +186,18 @@ export default function FeaturedShowcase({
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
+                </div>
+
+                <div className="relative mb-10 aspect-[4/3] overflow-hidden rounded-[20px] border border-white/10 lg:hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    data-fs-mobile-image
+                    src={p.image}
+                    alt={p.title}
+                    loading={i === 0 ? "eager" : "lazy"}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
                 </div>
 
                 <div data-fs-content>

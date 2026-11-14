@@ -30,7 +30,35 @@ export default function HorizontalShowcase({
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (window.innerWidth < 1024) return; // horizontal pin is desktop-only
+    if (window.innerWidth < 1024) {
+      const ctx = gsap.context(() => {
+        const track = trackRef.current;
+        if (!track) return;
+
+        const getDistance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+        const autoScroll = gsap.to(track, {
+          x: () => -getDistance(),
+          duration: 18,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1,
+          paused: true,
+          invalidateOnRefresh: true,
+        });
+
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          onEnter: () => autoScroll.play(),
+          onEnterBack: () => autoScroll.play(),
+          onLeave: () => autoScroll.pause(),
+          onLeaveBack: () => autoScroll.pause(),
+        });
+      }, sectionRef);
+
+      return () => ctx.revert();
+    }
 
     const ctx = gsap.context(() => {
       const track = trackRef.current;
@@ -104,7 +132,7 @@ export default function HorizontalShowcase({
         </p>
       </div>
 
-      <div ref={trackRef} className="flex w-max items-stretch gap-6 pl-[clamp(20px,5vw,96px)] pr-[clamp(20px,5vw,96px)] pb-16 lg:pb-24">
+      <div ref={trackRef} className="flex w-max items-stretch gap-6 pl-[7vw] pr-[7vw] pb-16 sm:pl-[15vw] sm:pr-[15vw] lg:pl-[clamp(20px,5vw,96px)] lg:pr-[clamp(20px,5vw,96px)] lg:pb-24">
         {slides.map((s, i) => (
           <div
             key={i}

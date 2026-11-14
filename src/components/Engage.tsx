@@ -116,9 +116,8 @@ export default function Engage() {
         <div className="k-container">
           <div className="mb-12 grid grid-cols-2 gap-6 border-b border-white/10 pb-8 md:grid-cols-4">
             {[
-              { k: "Project No.", v: "01 / Twitter MTC" },
-              { k: "Expertise", v: "UX/UI · Frontend · Motion" },
-              { k: "Client", v: "Twitter MTC" },
+              { k: "Project", v: "01 " },
+              { k: "Expertise", v: "Creative Direction" },
               { k: "Year", v: "2025" },
             ].map((m) => (
               <div key={m.k} data-engage-fade>
